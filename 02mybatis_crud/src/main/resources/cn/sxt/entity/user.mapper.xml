@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace命名空间 防止sql语句的id重名
+	 namespace 命名 包名+类名/包名+mapper文件名
+	 parameterType 指sql语句参数类型
+	 resultType 返回结果类型
+	 useGeneratedKeys="true" 使用自增主键
+ -->
+<mapper namespace="cn.sxt.entity.UserMapper">
+	<!-- 查询单个用户 
+		id在该文件中 唯一
+		
+	-->
+	<select id="selectUser" resultType="User" >
+		select * from user where id = #{id}
+	</select>
+	<!-- 查询所有用户 -->
+	<select id="selectAll" resultType="User">
+		select * from user
+	</select>
+	<!-- 添加用户 -->
+	<insert id="addUser" parameterType="User" useGeneratedKeys="true">
+		insert into user(name,pwd) values(#{name},#{pwd})
+	</insert>
+	<!-- 更新用户信息 -->
+	<update id="updateUser" parameterType="User">
+		update user set name=#{name},pwd=#{pwd} where id=#{id}
+	</update>
+	<!-- 删除用户 -->
+	<delete id="deleteUser">
+		delete from user where id=#{id}
+	</delete>
+</mapper>
